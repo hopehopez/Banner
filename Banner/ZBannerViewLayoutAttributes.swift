@@ -1,5 +1,5 @@
 //
-//  ZCollectionViewLayoutAttributes.swift
+//  ZBannerViewLayoutAttributes.swift
 //  Banner
 //
 //  Created by zsq on 2018/3/11.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ZCollectionViewLayoutAttributes: UICollectionViewLayoutAttributes {
+class ZBannerViewLayoutAttributes: UICollectionViewLayoutAttributes {
 
     var position: CGFloat = 0
     
     override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? ZCollectionViewLayoutAttributes else {
+        guard let object = object as? ZBannerViewLayoutAttributes else {
             return false
         }
         
@@ -24,7 +24,7 @@ class ZCollectionViewLayoutAttributes: UICollectionViewLayoutAttributes {
     }
     
     override func copy(with zone: NSZone? = nil) -> Any {
-        let copy = super.copy(with: zone) as! ZCollectionViewLayoutAttributes
+        let copy = super.copy(with: zone) as! ZBannerViewLayoutAttributes
         copy.position = self.position
         return copy
     }

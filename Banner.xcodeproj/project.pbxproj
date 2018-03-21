@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C34E55C2058067E00E13C66 /* ZBannerViewTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C34E55B2058067E00E13C66 /* ZBannerViewTransformer.swift */; };
 		7CA78210205507D7009E5292 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7820F205507D7009E5292 /* AppDelegate.swift */; };
 		7CA78212205507D7009E5292 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78211205507D7009E5292 /* ViewController.swift */; };
 		7CA78215205507D7009E5292 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA78213205507D7009E5292 /* Main.storyboard */; };
@@ -14,12 +15,13 @@
 		7CA7821A205507D7009E5292 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7CA78218205507D7009E5292 /* LaunchScreen.storyboard */; };
 		7CA78222205509D2009E5292 /* ZBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA78221205509D2009E5292 /* ZBannerView.swift */; };
 		7CA7822420550C14009E5292 /* ZCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7822320550C14009E5292 /* ZCollectionView.swift */; };
-		7CA7822620550C25009E5292 /* ZCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7822520550C25009E5292 /* ZCollectionViewLayout.swift */; };
+		7CA7822620550C25009E5292 /* ZBannerViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7822520550C25009E5292 /* ZBannerViewLayout.swift */; };
 		7CA7822820550C33009E5292 /* ZBannerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7822720550C33009E5292 /* ZBannerViewCell.swift */; };
-		7CA7822A20550C69009E5292 /* ZCollectionViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7822920550C69009E5292 /* ZCollectionViewLayoutAttributes.swift */; };
+		7CA7822A20550C69009E5292 /* ZBannerViewLayoutAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA7822920550C69009E5292 /* ZBannerViewLayoutAttributes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7C34E55B2058067E00E13C66 /* ZBannerViewTransformer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZBannerViewTransformer.swift; sourceTree = "<group>"; };
 		7CA7820C205507D7009E5292 /* Banner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Banner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CA7820F205507D7009E5292 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7CA78211205507D7009E5292 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,9 +31,9 @@
 		7CA7821B205507D7009E5292 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7CA78221205509D2009E5292 /* ZBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZBannerView.swift; sourceTree = "<group>"; };
 		7CA7822320550C14009E5292 /* ZCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZCollectionView.swift; sourceTree = "<group>"; };
-		7CA7822520550C25009E5292 /* ZCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZCollectionViewLayout.swift; sourceTree = "<group>"; };
+		7CA7822520550C25009E5292 /* ZBannerViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZBannerViewLayout.swift; sourceTree = "<group>"; };
 		7CA7822720550C33009E5292 /* ZBannerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZBannerViewCell.swift; sourceTree = "<group>"; };
-		7CA7822920550C69009E5292 /* ZCollectionViewLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZCollectionViewLayoutAttributes.swift; sourceTree = "<group>"; };
+		7CA7822920550C69009E5292 /* ZBannerViewLayoutAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZBannerViewLayoutAttributes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +70,10 @@
 				7CA78211205507D7009E5292 /* ViewController.swift */,
 				7CA78221205509D2009E5292 /* ZBannerView.swift */,
 				7CA7822320550C14009E5292 /* ZCollectionView.swift */,
-				7CA7822520550C25009E5292 /* ZCollectionViewLayout.swift */,
+				7CA7822520550C25009E5292 /* ZBannerViewLayout.swift */,
 				7CA7822720550C33009E5292 /* ZBannerViewCell.swift */,
-				7CA7822920550C69009E5292 /* ZCollectionViewLayoutAttributes.swift */,
+				7CA7822920550C69009E5292 /* ZBannerViewLayoutAttributes.swift */,
+				7C34E55B2058067E00E13C66 /* ZBannerViewTransformer.swift */,
 				7CA78213205507D7009E5292 /* Main.storyboard */,
 				7CA78216205507D7009E5292 /* Assets.xcassets */,
 				7CA78218205507D7009E5292 /* LaunchScreen.storyboard */,
@@ -155,8 +158,9 @@
 				7CA7822420550C14009E5292 /* ZCollectionView.swift in Sources */,
 				7CA78210205507D7009E5292 /* AppDelegate.swift in Sources */,
 				7CA7822820550C33009E5292 /* ZBannerViewCell.swift in Sources */,
-				7CA7822620550C25009E5292 /* ZCollectionViewLayout.swift in Sources */,
-				7CA7822A20550C69009E5292 /* ZCollectionViewLayoutAttributes.swift in Sources */,
+				7CA7822620550C25009E5292 /* ZBannerViewLayout.swift in Sources */,
+				7C34E55C2058067E00E13C66 /* ZBannerViewTransformer.swift in Sources */,
+				7CA7822A20550C69009E5292 /* ZBannerViewLayoutAttributes.swift in Sources */,
 				7CA78222205509D2009E5292 /* ZBannerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

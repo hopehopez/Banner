@@ -13,7 +13,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var bannerView: ZBannerView!{
         didSet{
             self.bannerView.register(cellClass: ZBannerViewCell.self, forCellWithReuseIdentifier: "cell")
-            self.bannerView.itemSize = .zero
+            let transform = CGAffineTransform(scaleX: 0.7, y: 1.0)
+            self.bannerView.itemSize = self.bannerView.frame.size.applying(transform)
+            self.bannerView.transformer = ZBannerViewTransformer.init(type: .overlap)
         }
     }
     

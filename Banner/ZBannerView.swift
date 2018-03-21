@@ -31,7 +31,7 @@ class ZBannerView: UIView {
     
     private weak var contentView: UIView!
     private weak var collectionVeiw: ZCollectionView!
-    private weak var collectionViewLayout: ZCollectionViewLayout!
+    private weak var collectionViewLayout: ZBannerViewLayout!
     
     private var timer: Timer?
     
@@ -53,6 +53,14 @@ class ZBannerView: UIView {
         }
     }
     
+    var transformer: ZBannerViewTransformer? {
+        didSet {
+            self.transformer?.bannerView = self
+            self.collectionViewLayout.forceInvalidate()
+        }
+    }
+    
+    
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,7 +78,7 @@ class ZBannerView: UIView {
         addSubview(contentView)
         self.contentView = contentView
         
-        let layout = ZCollectionViewLayout()
+        let layout = ZBannerViewLayout()
         let collectionView = ZCollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -95,7 +103,7 @@ class ZBannerView: UIView {
             return
         }
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(flipNext), userInfo: nil, repeats: true)
-        RunLoop.main.add(timer!, forMode: .defaultRunLoopMode)
+        RunLoop.main.add(timer!, forMode: .commonModes)
     }
     
     fileprivate func cancelTimer() {

@@ -1,5 +1,5 @@
 //
-//  ZCollectionViewLayout.swift
+//  ZBannerViewLayout.swift
 //  Banner
 //
 //  Created by zsq on 2018/3/11.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ZCollectionViewLayout: UICollectionViewLayout {
+class ZBannerViewLayout: UICollectionViewLayout {
 
     var contentSize:CGSize = .zero
     var leadingSpacing: CGFloat = 0
@@ -56,6 +56,9 @@ class ZCollectionViewLayout: UICollectionViewLayout {
         }()
         
         actualInteritemSpacing = {
+            if let transformer = bannerView.transformer {
+                return transformer.proposedInteritemSpacing()
+            }
             return bannerView.interitemSpacing
         }()
         
@@ -103,7 +106,8 @@ class ZCollectionViewLayout: UICollectionViewLayout {
         
         while originX - maxPositionX <= max(CGFloat(100.0) * .ulpOfOne * fabs(originX+maxPositionX), .leastNonzeroMagnitude) {
             let indexPath = IndexPath(item: itemIndex % numberOfItems, section: itemIndex/numberOfItems)
-            let attributes = layoutAttributesForItem(at: indexPath) as! ZCollectionViewLayoutAttributes
+            let attributes = layoutAttributesForItem(at: indexPath) as! ZBannerViewLayoutAttributes
+            applyTransform(to: attributes, with: bannerView?.transformer)
             layoutAtrributes.append(attributes)
             itemIndex += 1
             originX += itemSpacing
@@ -113,13 +117,13 @@ class ZCollectionViewLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes = ZCollectionViewLayoutAttributes(forCellWith: indexPath)
+        let attributes = ZBannerViewLayoutAttributes(forCellWith: indexPath)
         
         let frame = self.frame(for: indexPath)
         let center = CGPoint(x: frame.midX, y: frame.midY)
         attributes.center = center
         attributes.size = actualItemSize
-        print(indexPath, attributes.frame)
+        
         return attributes
     }
     
@@ -161,6 +165,22 @@ class ZCollectionViewLayout: UICollectionViewLayout {
         let originY: CGFloat = (self.collectionView!.frame.height - self.actualItemSize.height) * 0.5
         let frame = CGRect(x: originX, y: originY, width: self.actualItemSize.width, height: self.actualItemSize.height)
         return frame
+    }
+    
+    fileprivate func applyTransform(to attributes:ZBannerViewLayoutAttributes, with transformer: ZBannerViewTransformer?) {
+        
+        guard  let collectionView =  self.collectionView else {
+            return
+        }
+        
+        guard let transform = transformer else {
+            return
+        }
+        
+        let ruler = collectionView.bounds.midX
+        attributes.position = (attributes.center.x - ruler) / itemSpacing
+        attributes.zIndex = Int(numberOfItems) - Int(attributes.position)
+        transform.applyTransform(to: attributes)
     }
     
 }
