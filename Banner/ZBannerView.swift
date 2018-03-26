@@ -16,10 +16,17 @@ protocol ZBannerViewDataSource: NSObjectProtocol {
     
     @objc(bannerView:CellForItemAtIndex:)
     func bannerView(_ bannerView: ZBannerView, cellForItemAt index: Int) -> ZBannerViewCell
+    
+    
 }
 
 @objc
 protocol ZBannerViewDelegate: NSObjectProtocol {
+    @objc(bannerView:didSeclectedAtIndex:)
+    optional func bannerView(_ bannerView: ZBannerView, didSelectItemAt index:Int)
+    
+    @objc(bannerViewDidScroll:)
+    optional func bannerViewDidScroll(_ bannerView: ZBannerView)
     
 }
 
@@ -60,6 +67,12 @@ class ZBannerView: UIView {
         }
     }
     
+    var scollOffSet: CGFloat {
+        let contentOffSet = self.collectionVeiw.contentOffset.x
+        let scrollOffSet = contentOffSet / collectionViewLayout.itemSpacing
+        return fmod(scrollOffSet, CGFloat(numberOfItems))
+    }
+    
     
     
     public override init(frame: CGRect) {
@@ -83,7 +96,9 @@ class ZBannerView: UIView {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.orange
-        collectionView.isPagingEnabled = true
+        collectionView.alwaysBounceHorizontal = false
+        collectionView.alwaysBounceVertical = false
+//        collectionView.isPagingEnabled = true
         self.contentView.addSubview(collectionView)
         self.collectionVeiw = collectionView
         self.collectionViewLayout = layout
@@ -99,11 +114,11 @@ class ZBannerView: UIView {
     }
     
     func startTimer() {
-        guard timer == nil else {
-            return
-        }
-        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(flipNext), userInfo: nil, repeats: true)
-        RunLoop.main.add(timer!, forMode: .commonModes)
+//        guard timer == nil else {
+//            return
+//        }
+//        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(flipNext), userInfo: nil, repeats: true)
+//        RunLoop.main.add(timer!, forMode: .commonModes)
     }
     
     fileprivate func cancelTimer() {
@@ -207,5 +222,35 @@ extension ZBannerView: UICollectionViewDataSource {
 }
 
 extension ZBannerView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let function = delegate?.bannerView(_: didSelectItemAt:) else {
+            return
+        }
+        
+        let index = indexPath.item % numberOfItems
+        function(self, index)
+    }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if self.numberOfItems > 0 {
+            let currentIndex = lround(Double(self.scollOffSet)) % numberOfItems
+            if currentIndex != self.currentIndex {
+                self.currentIndex = currentIndex
+            }
+        }
+        
+        guard let function = self.delegate?.bannerViewDidScroll else {
+            return
+        }
+        
+        function(self)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        cancelTimer()
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        startTimer()
+    }
 }

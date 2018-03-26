@@ -13,9 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var bannerView: ZBannerView!{
         didSet{
             self.bannerView.register(cellClass: ZBannerViewCell.self, forCellWithReuseIdentifier: "cell")
-            let transform = CGAffineTransform(scaleX: 0.7, y: 1.0)
-            self.bannerView.itemSize = self.bannerView.frame.size.applying(transform)
-            self.bannerView.transformer = ZBannerViewTransformer.init(type: .overlap)
+            
+            
         }
     }
     
@@ -33,6 +32,9 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         testView.bounds = CGRect(x: 50, y: 0, width: 100, height: 50)
+        self.bannerView.transformer = ZBannerViewTransformer.init(type: .overlap)
+        let transform = CGAffineTransform(scaleX: 0.7, y: 1.0)
+        self.bannerView.itemSize = self.bannerView.frame.size.applying(transform)
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,6 +56,10 @@ extension ViewController: ZBannerViewDataSource, ZBannerViewDelegate{
         
         cell.imageView.image = image
         return cell
+        
+    }
+    
+    func bannerView(_ bannerView: ZBannerView, didSelectItemAt index: Int) {
         
     }
 }

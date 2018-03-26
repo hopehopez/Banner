@@ -34,9 +34,9 @@ class ZBannerViewTransformer: NSObject {
         var transform = CGAffineTransform(scaleX: scale, y: scale)
         var x: CGFloat = 0.0
         if position > 0 {
-            x = position * 100
+            x = position * 100.0
         } else {
-            x = position * 80
+            x = position * 80.0
         }
         
         if x > 50 {
@@ -57,14 +57,14 @@ class ZBannerViewTransformer: NSObject {
             return 0
         }
         
-        switch type {
-        case .none:
-            return 0
-        case .linear:
-            return -bannerView.itemSize.width * minimumScale * 0.2
-        case .overlap:
+//        switch type {
+//        case .none:
+//            return 0
+//        case .linear:
+//            return -bannerView.itemSize.width * minimumScale * 0.2
+//        case .overlap:
             return -bannerView.itemSize.width * minimumScale * 0.6
             
-        }
+//        }
     }
 }
