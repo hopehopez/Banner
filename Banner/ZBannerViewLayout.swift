@@ -127,6 +127,29 @@ class ZBannerViewLayout: UICollectionViewLayout {
         return attributes
     }
     
+     override open func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        
+        guard let collectionView = self.collectionView else {
+            return proposedContentOffset
+        }
+        var proposedContentOffset = proposedContentOffset
+        let proposedContentOffsetX:CGFloat = {
+            let translation = -collectionView.panGestureRecognizer.translation(in: collectionView).x
+            var offset:CGFloat = round(proposedContentOffset.x/itemSpacing) * itemSpacing
+            let minFilppingDistance = min(0.5 * itemSpacing, 150)
+            let originalContentOffSet = collectionView.contentOffset.x - translation
+            if abs(translation) <= minFilppingDistance {
+                if abs(velocity.x) >= 0.3 && abs(proposedContentOffset.x - originalContentOffSet) <= itemSpacing * 0.5 {
+                    offset += self.itemSpacing * (velocity.x)/abs(velocity.x)
+                }
+            }
+            return offset
+        }()
+        proposedContentOffset = CGPoint(x: proposedContentOffsetX, y: proposedContentOffset.y)
+        
+        return proposedContentOffset
+    }
+    
     internal func forceInvalidate() {
         isNeedsReprepare = true
         invalidateLayout()
